@@ -1,19 +1,20 @@
 {
-  "name": "wiki",
+  "name": "cronus-wiki",
   "version": "1.0.0",
-  "description": "My extraordinary Nuxt.js project",
-  "author": "link00000000",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
-  },
+  "main": "index.js",
+  "repository": "https://github.com/link00000000/wiki",
+  "author": "link00000000 <crandall.logan@gmail.com>",
+  "license": "MIT",
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon npm start"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.0.0"
+    "nodemon": "^2.0.4"
   }
 }

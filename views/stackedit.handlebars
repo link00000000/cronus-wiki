@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+
+  <style>
+    .stackedit-iframe-container {
+      border-radius: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: none !important;
+      max-width: none !important;
+    }
+
+    .stackedit-iframe-container iframe {
+      border-radius: 0 !important;
+    }
+
+    #save-indicator {
+      position: absolute;
+      z-index: 999999;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      right: 56px;
+      top: 12px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="save-indicator">Saving...</div>
+
+  <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
+  <script src="/lib/debounce.js"></script>
+
+  <script>
+    const SAVE_STATES = {
+      waiting: "⌚ Waiting",
+      saving: "💾 Saving",
+      done: "✅ Saved",
+      failed: "🛑 Failed to save"
+    }
+
+    const stackedit = new Stackedit()
+
+    stackedit.openFile({
+      name: `{{fileName}}`,
+      content: {
+        text: `{{fileContent}}`
+      }
+    })
+
+    stackedit.on('fileChange', ({ name, content }) => {
+      setSaveState(SAVE_STATES.waiting)
+      debounce(() => {
+        setSaveState(SAVE_STATES.saving)
+        updateFile(name, content.text).then(() => { setSaveState(SAVE_STATES.done) })
+      }, 2000)()
+    })
+
+    async function updateFile(name, content) {
+      const response = await fetch('/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: name, content })
+      })
+    }
+
+    function setSaveState(state) {
+      document.querySelector('#save-indicator').innerHTML = state
+    }
+  </script>
+</body>
+</html>
