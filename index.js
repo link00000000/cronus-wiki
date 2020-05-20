@@ -1,15 +1,9 @@
-const { readFile, writeFile } = require('fs')
-
 const express = require('express')
-const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 
 const app = express()
 
 const PORT = process.env.PORT || 8080
-
-app.engine('handlebars', expressHandlebars({ defaultLayout: false }))
-app.set('view engine', 'handlebars')
 
 app.use(express.static('static'))
 app.use('/lib', express.static('lib'))
@@ -21,5 +15,5 @@ app.use('/', require('./routers/docsifyStackEditPlugin'))
 // Docsify
 // example.com/
 app.get('/', (_req, res) => {
-    return res.render('docsify')
+    return res.sendFile('docsify.html', { root: './views' })
 })
