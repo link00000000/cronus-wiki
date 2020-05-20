@@ -1,4 +1,4 @@
-const { readFile, writeFile } = require('fs')
+const { readFile, writeFile, existsSync, lstatSync } = require('fs')
 const { join } = require('path')
 
 const express = require('express')
@@ -23,25 +23,40 @@ app.get('/', (_req, res) => {
     return res.render('docsify')
 })
 
-// StackEdit
-// example.com/edit/*
-app.get(/^\/edit\/.*/, (req, res) => {
-    let filePath = join(__dirname, 'static', req.url.substr('/edit'.length))
-        .replace(/\\/g, '\\\\')
+// Update document
+app.post('/read', (req, res) => {
+    const filePath = resolveMarkdownFile(req.body.path)
 
-    readFile(filePath, {}, (err, data) => {
-        if (err) return res.write('Error reading input file')
-        return res.render('stackedit', { fileName: filePath, fileContent: data })
+    console.log(filePath)
+
+    readFile(filePath, null, (err, data) => {
+        if (err) return res.sendStatus(500)
+        return res.send(`${data}`)
     })
 })
 
 // Update document
 app.post('/update', (req, res) => {
-    const filePath = req.body.path
+    const filePath = resolveMarkdownFile(req.body.path)
     const content = req.body.content
 
+    console.log('path: ' + filePath, 'content: ' + content)
+
     writeFile(filePath, content, null, (err, data) => {
-        if (err) return res.sendStatus(500).send(`{ "message": "${err}" }`)
+        if (err) return res.sendStatus(500)
         return res.send(`{ "message": "${data}" }`)
     })
 })
+
+// Get markdown file path from ambiguous path
+function resolveMarkdownFile(path) {
+    let filePath = join(__dirname, 'static', path)
+
+    if(existsSync(filePath) && lstatSync(filePath).isDirectory()) {
+        filePath = join(filePath, 'README.md')
+    } else {
+        filePath += '.md'
+    }
+    
+    return filePath
+}

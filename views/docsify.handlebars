@@ -5,21 +5,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
-  <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
+  <link rel="stylesheet" href="/lib/docsfiyStackEditPlugin.css">
+  <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
   <style>
     .sidebar-toggle-button {
       background-color: transparent !important;
       margin-left: 16px;
     }
+
+    #save-indicator {
+      position: absolute;
+      z-index: 999999;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      right: 56px;
+      top: 12px;
+      font-size: 0.8rem;
+    }
   </style>
 </head>
 <body>
   <div id="app"></div>
+  <script src="/lib/debounce.js"></script>
+  <script src="/lib/docsifyStackEditPlugin.js"></script>
   <script>
     window.$docsify = {
         el: '#app',
         plugins: [
-          EditOnGithubPlugin.create(null, '/edit/', 'Edit')
+          docsifyStackEditPlugin('/read', '/update')
         ]
     }
   </script>
