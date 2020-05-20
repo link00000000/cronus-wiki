@@ -12,6 +12,7 @@ app.listen(PORT, () => console.log('Listening on port ' + PORT))
 
 app.use('/', require('./routers/docsifyStackEditPlugin'))
 app.use('/', require('./routers/docsifyDeletePlugin'))
+app.use('/', require('./routers/docsifyCreatePlugin'))
 
 // Docsify
 // example.com/
