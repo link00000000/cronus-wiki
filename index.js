@@ -11,6 +11,7 @@ app.use(bodyParser.json())
 app.listen(PORT, () => console.log('Listening on port ' + PORT))
 
 app.use('/', require('./routers/docsifyStackEditPlugin'))
+app.use('/', require('./routers/docsifyDeletePlugin'))
 
 // Docsify
 // example.com/
