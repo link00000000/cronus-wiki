@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/lib/docsifyDeletePlugin.css">
   <link rel="stylesheet" href="/lib/docsifyCreatePlugin.css">
 
+  <title>Cronus Wiki</title>
+
   <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
   <script src="//unpkg.com/mermaid/dist/mermaid.js"></script>
   <style>
@@ -50,6 +52,7 @@
         name: 'Cronus Wiki',
         loadNavbar: true,
         autoHeader: true,
+        loadSidebar: true,
         plugins: [
           docsifyStackEditPlugin(),
           docsifyDeletePlugin(),
@@ -57,6 +60,15 @@
           (hook, vm) => hook.doneEach(() => twemoji.parse(document))
         ]
     }
+
+    const titleElem = document.querySelector('title')
+    setInterval(() => {
+      if(window.location.hash.substr(2))
+        titleElem.innerHTML = 'Cronus Wiki - ' + window.location.hash.substr(2)
+      else
+        titleElem.innerHTML = 'Cronus Wiki'
+
+    }, 1000)
   </script>
   
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
