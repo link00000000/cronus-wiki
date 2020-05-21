@@ -12,7 +12,7 @@ A simple self-hosted wiki using markdown files
 yarn build
 
 # Run docker image
-yarn production
+yarn prod
 ```
 
 Access the wiki at http://localhost:8080
