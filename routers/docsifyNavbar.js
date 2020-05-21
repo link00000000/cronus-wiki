@@ -1,4 +1,4 @@
-const { readdirSync } = require('fs')
+const { readdirSync, lstatSync } = require('fs')
 const { join, parse } = require('path')
 const { Router } = require('express')
 
@@ -13,7 +13,10 @@ router.get('/_navbar.md', (req, res) => {
 
 function getRoutes(root) {
     return readdirSync(root).sort().map(item => {
-        if(item === 'README.md') return ''
+        if(item === 'README.md'
+        || lstatSync(join(root, item)).isDirectory()
+        || item.charAt(0) === '_')
+            return ''
 
         const { name, dir } = parse(join(root, item))
         const url = join(dir, name)
