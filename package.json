@@ -13,7 +13,7 @@
     "start": "node index.js",
     "dev": "nodemon npm start",
     "build": "docker build -t cronus-wiki .",
-    "prod": "docker run -p 8080 -v ./static:/app/static cronus-wiki"
+    "prod": "docker run -p 8080:8080 -v ${PWD}/static:/app/static cronus-wiki"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

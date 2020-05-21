@@ -6,6 +6,8 @@ COPY package.json /app
 COPY yarn.lock /app
 COPY . /app
 
+EXPOSE 8080
+
 RUN yarn
 
 CMD [ "yarn", "start" ]
