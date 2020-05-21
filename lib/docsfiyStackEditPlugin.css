@@ -20,3 +20,7 @@
     opacity: 1;
     bottom: 30px;
 }
+
+.stackedit-icon img {
+    height: 24px;
+}

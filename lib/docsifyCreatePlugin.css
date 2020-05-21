@@ -20,3 +20,7 @@
     opacity: 1;
     bottom: 30px;
 }
+
+.create-icon img {
+    height: 24px;
+}

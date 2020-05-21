@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="/lib/docsfiyStackEditPlugin.css">
   <link rel="stylesheet" href="/lib/docsifyDeletePlugin.css">
   <link rel="stylesheet" href="/lib/docsifyCreatePlugin.css">
+
   <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
+  <script src="//unpkg.com/mermaid/dist/mermaid.js"></script>
   <style>
     .sidebar-toggle-button {
       background-color: transparent !important;
@@ -18,24 +20,49 @@
     .stackedit-iframe-container {
       box-shadow: 4px 4px 20px rgba(0, 0, 0, .2);
     }
+
+    .mermaid svg {
+      margin: 0 auto;
+      display: block;
+    }
+
+    main {
+      margin-top: 24px;
+    }
   </style>
 </head>
 <body>
   <div id="app"></div>
+
   <script src="/lib/debounce.js"></script>
   <script src="/lib/docsifyStackEditPlugin.js"></script>
   <script src="/lib/docsifyDeletePlugin.js"></script>
   <script src="/lib/docsifyCreatePlugin.js"></script>
+
   <script>
     window.$docsify = {
         el: '#app',
+        auto2top: true,
+        name: 'Cronus Wiki',
+        loadNavbar: true,
+        autoHeader: true,
         plugins: [
           docsifyStackEditPlugin(),
           docsifyDeletePlugin(),
-          docsifyCreatePlugin()
+          docsifyCreatePlugin(),
+          (hook, vm) => hook.doneEach(() => twemoji.parse(document))
         ]
     }
   </script>
+  
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+  <script src="//cdn.jsdelivr.net/gh/TaQini/docsify-twemoji@master/twemoji.min.js"></script>
+  <script src="//unpkg.com/docsify-mermaid@latest/dist/docsify-mermaid.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 </body>
 </html>
