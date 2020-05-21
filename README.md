@@ -1,4 +1,4 @@
-# wiki
+# Cronus Wiki
 A simple self-hosted wiki using markdown files
 
 ## Dependencies
