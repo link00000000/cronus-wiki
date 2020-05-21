@@ -17,7 +17,7 @@ router.delete('/delete', (req, res) => {
         unlinkSync(filePath)
     }
     catch (err) {
-        console.log(err)
+        console.error(err)
         return res.sendStatus(500)
     }
 
