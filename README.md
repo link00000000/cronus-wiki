@@ -2,9 +2,9 @@
 A simple self-hosted wiki using markdown files
 
 ## Dependencies
-- node >=v12.6.3
-- docker >=v19.03.9
-- yarn >=v1.22.4
+- [node](https://nodejs.org/en/download/) >=v12.6.3
+- [docker](https://docs.docker.com/engine/install/ubuntu/) >=v19.03.9
+- [yarn](https://yarnpkg.com/getting-started/install) >=v1.22.4
 
 ## Production
 ```bash
